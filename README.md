@@ -8,7 +8,7 @@ A npm package [is available](https://www.npmjs.com/package/@pojntfx/jitsi-meet-n
 
 ## Usage
 
-See [main.js](./main.js).
+See [@pojntfx/nextcloud-talk-bot-jitsi](https://github.com/pojntfx/nextcloud-talk-bot-jitsi).
 
 ## License
 

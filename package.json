@@ -1,6 +1,6 @@
 {
   "name": "@pojntfx/jitsi-meet-node-client",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A NodeJS client for Jitsi Meet.",
   "main": "dist/index.html",
   "repository": "git@github.com:pojntfx/jitsi-meet-node-client.git",
@@ -12,8 +12,7 @@
     "parcel": "^2.0.0-alpha.3.2"
   },
   "scripts": {
-    "build": "parcel build index.html && microbundle -i main.js -o dist/main.js",
-    "start": "node dist/main.js"
+    "build": "parcel build index.html && microbundle -i index.js -o dist/index.js"
   },
   "dependencies": {
     "puppeteer": "^2.1.1",
