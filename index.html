@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jitsi Meet Node Client</title>
+    <script src="https://meet.jit.si/external_api.js"></script>
+  </head>
+  <body>
+    <div id="meet"></div>
+    <script>
+      window.createRoom = (domain, roomName, botName, password) => {
+        const api = new JitsiMeetExternalAPI(domain, {
+          roomName,
+        });
+
+        setTimeout(() => {
+          api.executeCommand("displayName", botName);
+
+          api.addEventListener("passwordRequired", () => {
+            api.executeCommand("password", password);
+          });
+
+          api.addEventListener("videoConferenceJoined", (response) => {
+            api.executeCommand("password", password);
+          });
+        }, 100);
+      };
+
+      window.onload = () => {
+        window.createRoom(
+          "meet.jit.si",
+          "testing-room-for-bot",
+          "room-creation-bot",
+          "secure3"
+        );
+      };
+    </script>
+  </body>
+</html>
