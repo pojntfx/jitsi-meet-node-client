@@ -1,30 +1,19 @@
-import puppeteer from "puppeteer";
-import path from "path";
+import Jitsi from "./src/jitsi";
 import sleep from "sleep";
 
 const main = async () => {
-  const source = path.join(path.resolve("."), "dist", "index.html");
+  const jitsi = new Jitsi();
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: [
-      "--use-fake-device-for-media-stream",
-      "--use-fake-ui-for-media-stream=1",
-    ],
-  });
-  const page = await browser.newPage();
-  await page.goto(`file://${source}`);
+  await jitsi.open();
 
-  await page.evaluate(`window.createRoom(
-  "meet.jit.si",
-  "testing-room-for-bot",
-  "room-creation-bot",
-  "secure"
-);`);
+  const domain = process.env.JITSI_DOMAIN;
+  const roomName = process.env.JITSI_ROOM_NAME;
+  const botName = process.env.JITSI_BOT_NAME;
+  const password = process.env.JITSI_ROOM_PASSWORD;
 
-  sleep.sleep(20);
+  await jitsi.createRoom(domain, roomName, botName, password);
 
-  await browser.close();
+  await sleep.sleep(20);
+
+  await jitsi.close();
 };
-
-main();
