@@ -1,10 +1,14 @@
 import puppeteer from "puppeteer";
 import path from "path";
 
+/**
+ * A Jitsi client
+ */
 export default class {
+  /**
+   * Opens the browser/WebRTC node
+   */
   async open() {
-    const source = path.join(__dirname, "..", "dist", "index.html");
-
     this.browser = await puppeteer.launch({
       headless: true,
       args: [
@@ -12,12 +16,22 @@ export default class {
         "--use-fake-ui-for-media-stream=1",
       ],
     });
-    this.page = await this.browser.newPage();
-    await this.page.goto(`file://${source}`);
   }
 
+  /**
+   * Create a new room
+   * @param {string} domain Jitsi domain to use
+   * @param {string} roomName Room to create
+   * @param {string} botName Name of the bot to use to change the password
+   * @param {string} password Password to set
+   */
   async createRoom(domain, roomName, botName, password) {
-    await this.page.evaluate(`window.createRoom(
+    const source = path.join(__dirname, "..", "dist", "index.html");
+
+    const page = await this.browser.newPage();
+    await page.goto(`file://${source}`);
+
+    return await page.evaluate(`window.createRoom(
   "${domain}",
   "${roomName}",
   "${botName}",
@@ -25,6 +39,9 @@ export default class {
 );`);
   }
 
+  /**
+   * Closes the browser/WebRTC node
+   */
   async close() {
     return this.browser.close();
   }
