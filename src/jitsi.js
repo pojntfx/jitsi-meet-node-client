@@ -3,7 +3,7 @@ import path from "path";
 
 export default class {
   async open() {
-    const source = path.join(path.resolve(".."), "dist", "index.html");
+    const source = path.join(__dirname, "..", "dist", "index.html");
 
     this.browser = await puppeteer.launch({
       headless: true,
@@ -17,7 +17,7 @@ export default class {
   }
 
   async createRoom(domain, roomName, botName, password) {
-    await page.evaluate(`window.createRoom(
+    await this.page.evaluate(`window.createRoom(
   "${domain}",
   "${roomName}",
   "${botName}",

@@ -8,18 +8,15 @@
   "license": "AGPL-3.0",
   "private": false,
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/node": "^7.8.7",
+    "microbundle": "^0.11.0",
     "parcel": "^2.0.0-alpha.3.2"
   },
   "scripts": {
-    "build": "parcel build index.html && babel main.js --out-file dist/main.js",
+    "build": "parcel build index.html && microbundle -i main.js -o dist/main.js",
     "start": "node dist/main.js"
   },
   "dependencies": {
     "puppeteer": "^2.1.1",
     "sleep": "^6.1.0"
-  },
-  "type": "module"
+  }
 }
