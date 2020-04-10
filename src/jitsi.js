@@ -24,19 +24,26 @@ export default class {
    * @param {string} roomName Room to create
    * @param {string} botName Name of the bot to use to change the password
    * @param {string} password Password to set
+   * @param {string} keepAlive Amount of time (in seconds) to stay on page
    */
-  async createRoom(domain, roomName, botName, password) {
+  async createRoom(domain, roomName, botName, password, keepAlive) {
     const source = path.join(__dirname, "..", "dist", "index.html");
 
     const page = await this.browser.newPage();
     await page.goto(`file://${source}`);
 
-    return await page.evaluate(`window.createRoom(
+    await page.evaluate(`window.createRoom(
   "${domain}",
   "${roomName}",
   "${botName}",
   "${password}"
 );`);
+
+    await new Promise((resolve) =>
+      setInterval(() => resolve(), 1000 * keepAlive)
+    );
+
+    return await page.close();
   }
 
   /**

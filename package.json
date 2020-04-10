@@ -15,7 +15,6 @@
     "build": "parcel build index.html && microbundle -i index.js -o dist/index.js"
   },
   "dependencies": {
-    "puppeteer": "^2.1.1",
-    "sleep": "^6.1.0"
+    "puppeteer": "^2.1.1"
   }
 }
