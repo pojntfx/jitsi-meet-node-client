@@ -1,10 +1,10 @@
-import puppeteer from "puppeteer";
-import path from "path";
+const puppeteer = require("puppeteer");
+const path = require("path");
 
 /**
  * A Jitsi client
  */
-export default class {
+module.exports = class {
   /**
    * Opens the browser/WebRTC node
    */
@@ -52,4 +52,4 @@ export default class {
   async close() {
     return this.browser.close();
   }
-}
+};

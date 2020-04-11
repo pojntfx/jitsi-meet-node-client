@@ -1,3 +1,3 @@
-import Jitsi from "./src/jitsi";
+const Jitsi = require("./src/jitsi");
 
-export default Jitsi;
+module.exports = Jitsi;
