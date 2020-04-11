@@ -28,7 +28,7 @@ module.exports = class {
    * @param {string} keepAlive Amount of time (in seconds) to stay on page
    */
   async createRoom(domain, roomName, botName, password, keepAlive) {
-    const source = path.join(__dirname, "..", "dist", "index.html");
+    const source = path.join(__dirname, "index.html");
 
     const page = await this.browser.newPage();
     await page.goto(`file://${source}`);
