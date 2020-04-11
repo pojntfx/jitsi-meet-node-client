@@ -12,6 +12,7 @@ module.exports = class {
     this.browser = await puppeteer.launch({
       headless: true,
       args: [
+        "--no-sandbox",
         "--use-fake-device-for-media-stream",
         "--use-fake-ui-for-media-stream=1",
       ],
